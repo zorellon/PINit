@@ -23,7 +23,9 @@ passport.use(
     new GithubStrategy({
         clientID: keys.githubClientID,
         clientSecret: keys.githubClientSecret,
-        callbackURL: 'http://localhost:5000/auth/github/callback'
+        callbackURL: '/auth/github/callback',
+        // set google to trust proxy
+        proxy: true
     },
     // from documentation
     // function(accessToken, refreshToken, profile, cb) {
