@@ -1,22 +1,27 @@
 import React, { Component } from 'react';
+import {BrowserRouter, Route} from 'react-router-dom';
+
+// component boilerplate for router
+const Header = () => <h2>Header</h2>
+const Home = () => <h2>Home</h2>
+const Profile = () => <h2>Profile</h2>
+const AddPin = () => <h2>AddPin</h2>
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="/auth/github"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+      <div >
+          <a>
             PINit
           </a>
-        </header>
+          <BrowserRouter>
+            <div>
+              <Header />
+              <Route exact path="/" component={Home} />
+              <Route path="/AddPin"component={AddPin} />
+              <Route path="/Profile/:id"component={Profile} />
+            </div>
+          </BrowserRouter>
       </div>
     );
   }
