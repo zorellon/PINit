@@ -34,20 +34,18 @@ passport.use(
     //   });
     // }
 
-    (accessToken, refreshToken, profile, done) => {
+    async (accessToken, refreshToken, profile, done) => {
         // return promise
-        User.findOne({githubId: profile.id})
-            .then((existingUser) => {
+        const existingUser = await User.findOne({githubId: profile.id})
                 if(existingUser){
                     // a record with this id exists
                     done(null,existingUser);
                 }else {
                     // we dont have a user record with this id
-                    new User({githubId: profile.id})
+                    const user = await new User({githubId: profile.id})
                         .save()
-                        .then(user => done(null,user));
+                        done(null,user);
                 }
-            });
     }
     )
 );
