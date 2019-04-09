@@ -23,7 +23,7 @@ module.exports = (app) => {
         req.logout();
         res.send(req.user);
     });
-
+    // responds with user model if user is logged in
     app.get('/api/current_user', (req, res) => {
         // passport automatically attaches user to req
         res.send(req.user);

@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import {BrowserRouter, Route} from 'react-router-dom';
+import {connect} from 'react-redux';
+// get all action creators
+import * as actions from '../actions';
 
 // component boilerplate for router
 import Header from './Header';
@@ -8,6 +11,11 @@ const Profile = () => <h2>Profile</h2>
 const AddPin = () => <h2>AddPin</h2>
 
 class App extends Component {
+
+  componentDidMount(){
+    this.props.fetchUser();
+  }
+
   render() {
     return (
       <div >
@@ -24,4 +32,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(null, actions)(App);
