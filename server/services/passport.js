@@ -33,7 +33,6 @@ passport.use(
     //     return cb(err, user);
     //   });
     // }
-
     async (accessToken, refreshToken, profile, done) => {
         // return promise
         const existingUser = await User.findOne({githubId: profile.id})
@@ -42,9 +41,13 @@ passport.use(
                     done(null,existingUser);
                 }else {
                     // we dont have a user record with this id
+                    //, githubName: profile.username to get username 
                     const user = await new User({githubId: profile.id})
-                        .save()
-                        done(null,user);
+                        .save(function(err){
+                            if (err)
+                                throw err;
+                            return done(null, user);
+                        });
                 }
     }
     )

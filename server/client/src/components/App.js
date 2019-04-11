@@ -6,9 +6,9 @@ import * as actions from '../actions';
 
 // component boilerplate for router
 import Header from './Header';
-const Home = () => <h2>Home</h2>
+import Home from './Home';
+import AddPin from './AddPin';
 const Profile = () => <h2>Profile</h2>
-const AddPin = () => <h2>AddPin</h2>
 
 class App extends Component {
 
@@ -18,9 +18,9 @@ class App extends Component {
 
   render() {
     return (
-      <div >
+      <div className = "ui container">
           <BrowserRouter>
-            <div>
+            <div >
               <Header />
               <Route exact path="/" component={Home} />
               <Route path="/AddPin"component={AddPin} />
@@ -32,4 +32,7 @@ class App extends Component {
   }
 }
 
-export default connect(null, actions)(App);
+export default connect(
+  null, 
+  actions
+)(App);

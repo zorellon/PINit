@@ -10,18 +10,21 @@ module.exports = (app) => {
     // create github authentication route handlers flow
     app.get('/auth/github', 
     passport.authenticate('github'
-        // ,{
-        //     scope: ['profile']
-        // }
+        ,{
+            scope: ['user']
+        }
     ));
 
     app.get('/auth/github/callback', 
-    passport.authenticate('github')
+        passport.authenticate('github'),
+        (req,res) => {
+            res.redirect('/');
+        }
     );
-
+    // User is logged out when directed here
     app.get('/api/logout', (req, res) => {
         req.logout();
-        res.send(req.user);
+        res.redirect('/');
     });
     // responds with user model if user is logged in
     app.get('/api/current_user', (req, res) => {
