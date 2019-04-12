@@ -1,35 +1,31 @@
 const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
 
-//const Pin = mongoose.model('pins');
+const Pin = mongoose.model('pins');
 
 module.exports = (app) => {
 
     // get all pins in db
     app.get('/api/pins', async(req,res) => {
-        Pin.find(function(err,pins){
-            if (err){
-                console.log(err);
-            }else{
-                res.json(pins)
-            }
-        });
+        const pins = await Pin.find({});
+        res.send(pins);
     });
 
-    // get all pins by a user
-    // app.get('/api/pin/:id' ,(req,res) => {
-    //     const id = req.params.id;
-    //     Pin.findById(id,function(err,pins){
-    //         if (err){
-    //             console.log(err);
-    //         }else{
-    //             res.json(pins)
-    //         }
-    //     });
-    // });
+    //get all pins by a user
+    app.get('/api/pin/:id' ,async (req,res) => {
+        const pins = await Pin.findById({pinAuthor: req.id});
+        res.send(pins);    
+    });
 
+    //get all pins by the current user
+    app.get('/api/mypins' ,requireLogin,async(req,res) => {
+        const pins = await Pin.find({pinAuthor: req.user.id});
+        res.send(pins);
+    });
+
+    
     // pass in requireLogin middleware to make sure user is logged in
-    app.post('/api/pin/new', requireLogin, async(req,res) => {
+    app.post('/api/pin/new2', requireLogin, async(req,res) => {
         const{pinTitle,pinDescription,pinURL} = req.body;
 
         const pin = new Pin({
@@ -44,6 +40,7 @@ module.exports = (app) => {
         try{
             await res.send(pin);
             await pin.save();
+            //await res.redirect('/');
         }
         catch (err){
             res.status(422).send('adding pin failed')

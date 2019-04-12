@@ -1,45 +1,42 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
+//import {connect} from 'react-redux';
+//import {Link} from 'react-router-dom';
 //import axios from 'axios';
+import { reduxForm } from 'redux-form';
+import AddPinForm from './AddPinForm';
+import AddPinReview from './AddPinReview';
 
-import PinForm from './PinForm';
-import {createPin} from '../actions';
-//import {fetchPins} from '../actions';
+class AddPin extends Component {
 
+    state = { showFormReview: false };
 
+    renderContent() {
+        if (this.state.showFormReview) {
+          return (
+            <AddPinReview
+              onCancel={() => this.setState({ showFormReview: false })}
+            />
+          );
+        }
+    
+        return (
+          <AddPinForm
+            onPinSubmit={() => this.setState({ showFormReview: true })}
+          />
+        );
+      }
 
-
-class AddPin extends React.Component {
-
-    // <input type="file" onChange= {this.fileSelectedHandler}/>
-    // <button onClick={this.fileUploadHandler} > Upload</button>
-
-    // passed down as prop
-    onSubmit = (formValues) => {
-        //console.log(formValues);
-        this.props.createPin(formValues);
-    }
 
     render(){
         return(
             <div style = {{marginTop:20}}>
-                <h2>AddPin</h2>
-                <PinForm onSubmit={this.onSubmit}/> 
+                {this.renderContent()}
             </div>
         );
     }
 }
 
-// function mapStateToProps(state){
-//     return{
-//         formValues: state.form.pinForm.values
-//     };
-// }
 
-
-export default connect(
-    //mapStateToProps,
-    null,
-    {createPin}
-)(AddPin);
+export default reduxForm({
+    form: 'pinForm'
+  })(AddPin);

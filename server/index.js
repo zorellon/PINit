@@ -6,7 +6,12 @@ const pinRoutes = require('./routes/pinRoutes');
 const keys = require('./config/keys');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+
 const cookieSession = require('cookie-session');
+
+// connect to Mongo DB
+mongoose.Promise = global.Promise;
+mongoose.connect(keys.mongoURI);
 const passport =require('passport');
 require('./models/Pins'); 
 require('./models/User'); // must be declared before services/passport
@@ -40,7 +45,6 @@ app.use(passport.session());
 // pass app to Routes files
 authRoutes(app);
 pinRoutes(app);
-
 
 // the port will be dynamically made by Heroku in produrtion
 // OR 5000 for development

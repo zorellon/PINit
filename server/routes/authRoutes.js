@@ -9,7 +9,7 @@ module.exports = (app) => {
 
     // create github authentication route handlers flow
     app.get('/auth/github', 
-    passport.authenticate('github'
+        passport.authenticate('github'
         ,{
             scope: ['user']
         }
