@@ -8,6 +8,10 @@ import * as actions from '../actions';
 import Header from './Header';
 import Home from './Home';
 import AddPin from './AddPin';
+import PinList from './PinList';
+
+// to implement a profile page
+//import Profile from './Profile';
 const Profile = () => <h2>Profile</h2>
 
 class App extends Component {
@@ -23,7 +27,8 @@ class App extends Component {
             <div >
               <Header />
               <Route exact path="/" component={Home} />
-              <Route path="/AddPin"component={AddPin} />
+              <Route exact path="/PinList"component={PinList} />
+              <Route exact path="/AddPin"component={AddPin} />
               <Route path="/Profile/:id"component={Profile} />
             </div>
           </BrowserRouter>

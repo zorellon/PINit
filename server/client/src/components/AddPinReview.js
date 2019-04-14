@@ -23,7 +23,7 @@ const AddPinReview = ({ onCancel, formValues, createPin, history }) => {
                     <img
                         src= {formValues.pinURL}
                         style={{ maxWidth: '100%' }}
-                        alt= "Preview the entered image URL"
+                        alt= "Preview the entered  URL"
                     />
                     </div>  
                 </div>
@@ -46,9 +46,7 @@ const AddPinReview = ({ onCancel, formValues, createPin, history }) => {
 
 function mapStateToProps(state) {
     //console.log(state);
-    return { 
-        formValues: state.form.pinForm.values 
-    };
+    return { formValues: state.form.pinForm.values };
 }
 
 export default connect(mapStateToProps, actions)(withRouter(AddPinReview));

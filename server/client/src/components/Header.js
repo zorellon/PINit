@@ -4,45 +4,35 @@ import {connect} from 'react-redux';
 
 class Header extends Component {
 
-    renderLogGithub(){
+    renderLoggedInOption(){
         switch (this.props.auth){
             case null:
                 return;
             case false:
                 return <li className ="item"><a href="/auth/github" >Log In with GitHub </a></li>;
             default:
-                return  <li className ="item"><a href="/api/logout" >Log Out </a></li>;
+                return [
+                    <li key="1" className ="item"><a href="/AddPin" >Add Pin </a></li>,
+                    <li key="2" className ="item"><a href="/api/logout" >Log Out </a></li>
+                ];
         }
     }
-    renderAddPin(){
-        switch (this.props.auth){
-            case null:
-                return;
-            case false:
-                return;
-            default:
-                return  (
-                <li className ="item">
-                    <a href="/AddPin" >AddPin </a>
-                </li>
-                );
-        }
-    }
+
     render(){
         return(
             <div className="ui secondary pointing menu">
                 <div className="left menu">
                 <Link 
-                    to= "/"
+                    to= '/'
                     className ="item"
                 >
                     PIN it
                 </Link>
+
                 </div>
                 
                 <div className="right menu">
-                    {this.renderAddPin()}
-                    {this.renderLogGithub()}         
+                    {this.renderLoggedInOption()}         
                 </div>
             </div>
         );

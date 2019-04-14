@@ -1,19 +1,12 @@
-
 const express = require('express');
-const authRoutes = require('./routes/authRoutes');
-const pinRoutes = require('./routes/pinRoutes');
-//const pinRoutes = express.Router();
-const keys = require('./config/keys');
-const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-
+const keys = require('./config/keys');
+//import middleware
+const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
-
-// connect to Mongo DB
-mongoose.Promise = global.Promise;
-mongoose.connect(keys.mongoURI);
 const passport =require('passport');
-require('./models/Pins'); 
+//import models
+require('./models/Pins'); // must be declared before services/passport
 require('./models/User'); // must be declared before services/passport
 // import passport 
 require('./services/passport');
@@ -21,15 +14,16 @@ require('./services/passport');
 // connect to Mongo DB
 mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI);
-const connection = mongoose.connection;
-connection.once('open', function(){
-    console.log("MongoDB connection was successfull");
-})
+
+// const connection = mongoose.connection;
+// connection.once('open', function(){
+//     console.log("MongoDB connection was successfull");
+// })
 
 // create express application
 const app = express();
 
-// middleware for parsing and cookies session
+// middleware for parsing .body and cookies session
 app.use(bodyParser.json());
 app.use(
     cookieSession({
@@ -43,8 +37,20 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // pass app to Routes files
+const authRoutes = require('./routes/authRoutes');
+const pinRoutes = require('./routes/pinRoutes');
 authRoutes(app);
 pinRoutes(app);
+
+if (process.env.NODE_ENV === 'production') {
+    // Express will serve up production assets like our main.js file
+    app.use(express.static('client/build'));
+    // Express will serve up the index.html file if it doesn't recognize the route
+    const path = require('path');
+    app.get('*', (req, res) => {
+      res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
+}
 
 // the port will be dynamically made by Heroku in produrtion
 // OR 5000 for development
