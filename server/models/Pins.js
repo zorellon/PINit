@@ -10,4 +10,4 @@ const pinSchema = new Schema({
     dateCreated: Date
 });
 
-mongoose.model('pins', pinSchema);
+module.exports = mongoose.model('pins', pinSchema);

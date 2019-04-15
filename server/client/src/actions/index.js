@@ -1,5 +1,5 @@
 import axios from 'axios';
-import history from '../history';
+//import history from '../history';
 
 import {
     FETCH_USER, 
@@ -32,13 +32,13 @@ export const createPin = (formValues, history) =>
     
 export const deletePin = (id) => 
     async (dispatch) => {
-        await axios.delete('/api/pin/delete/:id', id);
-        
+        const res = await axios.delete(`/api/pin/delete/${id}`);
+
         dispatch({
             type: DELETE_PIN,
-            payload: id
+            payload: res.data
         });
-        history.push('/');
+        //history.push('/');
     };
 
 export const fetchPins = () => 

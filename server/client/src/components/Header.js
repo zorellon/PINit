@@ -14,6 +14,7 @@ class Header extends Component {
                 return [
                     <li key="1" className ="item"><a href="/AddPin" >Add Pin </a></li>,
                     <li key="2" className ="item"><a href="/api/logout" >Log Out </a></li>
+                    
                 ];
         }
     }
@@ -22,16 +23,15 @@ class Header extends Component {
         return(
             <div className="ui secondary pointing menu">
                 <div className="left menu">
-                <Link 
-                    to= '/'
-                    className ="item"
-                >
-                    PIN it
-                </Link>
-
-                </div>
-                
+                    <Link 
+                        to= '/'
+                        className ="item"
+                    >
+                        PIN it
+                    </Link>
+                </div>        
                 <div className="right menu">
+                    <li key="3" className ="item"><a href="/PinList" >Pin List </a></li>
                     {this.renderLoggedInOption()}         
                 </div>
             </div>

@@ -5,6 +5,7 @@ const keys = require('./config/keys');
 const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
 const passport =require('passport');
+const cors = require('cors');
 //import models
 require('./models/Pins'); // must be declared before services/passport
 require('./models/User'); // must be declared before services/passport
@@ -20,10 +21,12 @@ mongoose.connect(keys.mongoURI);
 //     console.log("MongoDB connection was successfull");
 // })
 
-// create express application
+
+// define our app using express
 const app = express();
 
 // middleware for parsing .body and cookies session
+app.use(cors());
 app.use(bodyParser.json());
 app.use(
     cookieSession({
@@ -35,6 +38,13 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
+
+
+// test route
+app.get('/api/test', function(req, res) {
+    res.json({ message: 'The API is active TEST' });   
+});
+
 
 // pass app to Routes files
 const authRoutes = require('./routes/authRoutes');

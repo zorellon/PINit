@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
+//import {Link} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import * as actions from '../actions';
 //import _ from 'lodash';
 // for css image grid styling
@@ -8,10 +9,32 @@ import './PinList.css';
 
 class PinList extends Component {
 
+
     componentDidMount(){
         this.props.fetchPins();
+        //this.props.fetchUser();
+
     }
 
+    renderDeleteButtons(pin,auth){
+        if(this.props.auth._id != null){
+            if (pin.pinAuthor === this.props.auth._id) {
+                return(
+                    <div className="left floated content">
+                       <button 
+                            //href="/api/pin/delete" 
+                            //history
+                            onClick={() => this.props.deletePin(pin._id)}
+                            className="ui button negative"
+                        >
+                            Delete 
+                        </button>
+                    </div>
+                );
+            }
+        }
+
+    }
 
     renderPins() {
         //className="pin-list" 
@@ -28,27 +51,21 @@ class PinList extends Component {
                         />
                     </div>
                     <div className="content">
-                    <div className="header">{pin.pinTitle}</div>
-                    <div className="description">
-                    {pin.pinDescription}
+                        <div className="header">
+                            {pin.pinTitle}
+                        </div>
+                        <div className="description">
+                            {pin.pinDescription}
+                        </div>
+                        <span className="left floated">
+                            by: {pin.pinAuthor}
+                        </span>
                     </div>
-                    <span className="left floated">
-                    {pin.pinAuthor}
-                    </span>
-                    </div>
-                    <div className="extra content">
-                    {/* <button href='/api/pin/delete/${id}'
-                        //onClick={() => this.props.deletePin(pin._id)}
-                        className="ui button"
-                    >
-                        Delete
-                    </button> */}
-                    <Link to={`/api/pin/delete/${pin._id}`} className="ui button negative">
-                        Delete
-                    </Link>
-                    <span className="right floated">
-                        Posted: {new Date(pin.dateCreated).toLocaleDateString()}
-                    </span>
+                    <div className="extra content"> 
+                            {this.renderDeleteButtons(pin,pin.pinAuthor)}
+                        <span className="right floated">
+                            Posted: {new Date(pin.dateCreated).toLocaleDateString()}
+                        </span>
                     </div>
                 </div>
                 <br></br>
@@ -76,4 +93,4 @@ function mapStateToProps(state) {
 }
 
 
-export default connect(mapStateToProps, actions)(PinList);
+export default connect(mapStateToProps, actions)(withRouter(PinList));
