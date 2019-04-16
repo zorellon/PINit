@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 //import {Link} from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../actions';
-//import _ from 'lodash';
 // for css image grid styling
 import './PinList.css';
 
@@ -16,29 +15,24 @@ class PinList extends Component {
 
     }
 
-    renderDeleteButtons(pin,auth){
-        if(this.props.auth._id != null){
-            if (pin.pinAuthor === this.props.auth._id) {
-                return(
-                    <div className="left floated content">
-                       <button 
-                            //href="/api/pin/delete" 
-                            //history
-                            onClick={() => this.props.deletePin(pin._id)}
-                            className="ui button negative"
-                        >
-                            Delete 
-                        </button>
-                    </div>
-                );
-            }
-        }
-
+    renderShareButtons(pin){
+        return(
+            <div className="left floated content">
+            <button 
+                    //history
+                    onClick={() => this.props.sharePin(pin._id)}
+                    className="ui button"
+                >
+                    Share
+                </button>
+            </div>
+        );
     }
 
     renderPins() {
         //className="pin-list" 
-        //const pinCards this.
+        //{this.renderShareButtons(pin)}
+        //<a href="/Profile" > by: {pin.pinAuthor} <a>
         return this.props.pins.reverse().map(pin => {
             return(
                 <div   key = {pin._id}>
@@ -47,7 +41,7 @@ class PinList extends Component {
                         <img 
                             key = {pin._id}
                             src={pin.pinURL}
-                            alt=""
+                            alt="invalid url"
                         />
                     </div>
                     <div className="content">
@@ -58,11 +52,11 @@ class PinList extends Component {
                             {pin.pinDescription}
                         </div>
                         <span className="left floated">
-                            by: {pin.pinAuthor}
+                        by: {pin.pinAuthor} 
                         </span>
                     </div>
                     <div className="extra content"> 
-                            {this.renderDeleteButtons(pin,pin.pinAuthor)}
+                            
                         <span className="right floated">
                             Posted: {new Date(pin.dateCreated).toLocaleDateString()}
                         </span>
@@ -83,6 +77,7 @@ class PinList extends Component {
         );
     }
 }
+
 
 function mapStateToProps(state) {
     console.log(state);

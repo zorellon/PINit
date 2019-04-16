@@ -36,7 +36,7 @@ const AddPinReview = ({ onCancel, formValues, createPin, history }) => {
             </button>
             <button
                 onClick={() => createPin(formValues, history)}
-                className="ui button"
+                className="ui button primary"
             >
                 Create Pin
             </button>

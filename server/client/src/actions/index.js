@@ -23,22 +23,23 @@ export const createPin = (formValues, history) =>
     async (dispatch) => {
         const res = await axios.post('/api/pin/new', formValues);
         
+        history.push('/');
         dispatch({
             type: CREATE_PIN,
             payload: res.data
         });
-        history.push('/');
     };
     
-export const deletePin = (id) => 
+export const deletePin = (id,history) => 
     async (dispatch) => {
         const res = await axios.delete(`/api/pin/delete/${id}`);
 
+        history.push('/');
         dispatch({
             type: DELETE_PIN,
             payload: res.data
         });
-        //history.push('/');
+        
     };
 
 export const fetchPins = () => 

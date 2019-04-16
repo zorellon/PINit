@@ -40,9 +40,11 @@ module.exports = (app) => {
         Pin.findOneAndDelete({_id: req.params.pin_id}, function(err, pin) {
             if (err)
                 res.send(err);
+
             res.json(pin);
-            //res.json({ message: 'Successfully deleted' });
-            //res.redirect('/');
+                //res.json({ message: 'Successfully deleted' });
+                //res.redirect('/');
+            
         });
     });
     
@@ -69,24 +71,5 @@ module.exports = (app) => {
         }
     
     });
-
-    // app.delete('/api/pin/delete', function (req, res) {
-    //     res.send('Got a DELETE request at /user')
-    // })
-
-    //delete pin with that id
-    // app.delete('/api/pin/delete',async(req,res) => {
-    //     //console.log(req.params.id);
-    //     Pin.findByIdAndRemove({_id: req.params.id});
-    //     res.redirect('/');
-    // });
-
-    // app.route('/api/pin/delete/:id').get(function (req, res) {
-    //     Pin.findByIdAndRemove({_id: req.params.id}, function(err, pin){
-    //         if(err) res.json(err);
-    //         else res.json('Successfully removed');
-    //     });
-    // });
-
 
 };

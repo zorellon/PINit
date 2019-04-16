@@ -9,10 +9,7 @@ import Header from './Header';
 import Home from './Home';
 import AddPin from './AddPin';
 import PinList from './PinList';
-
-// to implement a profile page
-//import Profile from './Profile';
-const Profile = () => <h2>Profile</h2>
+import Profile from './Profile';
 
 class App extends Component {
 
@@ -29,7 +26,7 @@ class App extends Component {
               <Route exact path="/" component={Home} />
               <Route exact path="/PinList"component={PinList} />
               <Route exact path="/AddPin"component={AddPin} />
-              <Route path="/Profile/:id"component={Profile} />
+              <Route path="/Profile"component={Profile} />
             </div>
           </BrowserRouter>
       </div>

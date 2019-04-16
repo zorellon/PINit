@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-//import {connect} from 'react-redux';
-//import {Link} from 'react-router-dom';
-//import axios from 'axios';
 import { reduxForm } from 'redux-form';
 import AddPinForm from './AddPinForm';
 import AddPinReview from './AddPinReview';

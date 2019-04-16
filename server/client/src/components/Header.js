@@ -12,13 +12,14 @@ class Header extends Component {
                 return <li className ="item"><a href="/auth/github" >Log In with GitHub </a></li>;
             default:
                 return [
-                    <li key="1" className ="item"><a href="/AddPin" >Add Pin </a></li>,
-                    <li key="2" className ="item"><a href="/api/logout" >Log Out </a></li>
+                    <li key="1" className ="item"><a href="/Profile" >Profile </a></li>,
+                    <li key="2" className ="item"><a href="/AddPin" >Add Pin </a></li>,
+                    <li key="3" className ="item"><a href="/api/logout" >Log Out </a></li>
                     
                 ];
         }
     }
-
+    
     render(){
         return(
             <div className="ui secondary pointing menu">
@@ -31,7 +32,7 @@ class Header extends Component {
                     </Link>
                 </div>        
                 <div className="right menu">
-                    <li key="3" className ="item"><a href="/PinList" >Pin List </a></li>
+                    <li key="4" className ="item"><a href="/PinList" >Pin List </a></li>
                     {this.renderLoggedInOption()}         
                 </div>
             </div>

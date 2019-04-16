@@ -3,7 +3,6 @@ import {Field,reduxForm} from 'redux-form';
 //import { format } from 'util';
 //import validateURL from '../utils/validateURL';
 import {Link} from 'react-router-dom';
-//import AddPinReview from './AddPinReview';
 
 class AddPinForm extends Component {
 
@@ -53,26 +52,6 @@ class AddPinForm extends Component {
             </div>
         );
     }
-
-    // renderImage = ( ) => {
-    //     //src='https://lh5.googleusercontent.com/-4FW8pDSOyMc/Ts_CgxGqVaI/AAAAAAAAirA/ZcF1I81hBvU/s1600/YK_203.jpg'
-    //     return (
-    //         <div>
-    //             <img
-    //                 src= {this.state.pinURL}
-    //                 style={{ maxWidth: '100%' }}
-    //                 alt= "Preview the entered URL"
-    //                 onError={this.onError}
-    //             />
-    //         </div>  
-    //     );
-    // }
-
-    // onSubmit = (formValues) => {
-    //     //console.log(formValues);
-    //     // calls on submit passed down from 
-    //     this.props.onSubmit(formValues);
-    // }
 
     render(){
         //console.log(this.props);
