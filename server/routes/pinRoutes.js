@@ -13,10 +13,10 @@ module.exports = (app) => {
         res.send(pins);
     });
 
-    //get all pins by a user
-    // app.get('/api/userpins/:user_id', async (req,res) => {
-    //     const pins = await Pin.findById({req.user.user_id});
-    //     res.send(pins);    
+    //get a single pin
+    // app.get('/api/pins/:pin_id', async (req,res) => {
+    //     const pin = await Pin.findById({req.pin.pin_id});
+    //     res.send(pin);    
     // });
 
 
@@ -56,7 +56,7 @@ module.exports = (app) => {
             pinTitle: req.body.pinTitle,
             pinDescription: req.body.pinDescription,
             pinURL: req.body.pinURL,
-            //pinShortURL,
+            //pinShortURL: "/api/pin/:pin_id"
             pinAuthor: req.user.id,
             dateCreated: Date.now()
         });
