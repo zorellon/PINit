@@ -8,7 +8,8 @@ Functionalities:
 
 As an unauthenticated user:
 -    I can login with GitHub. 
--    I can browse other users’ walls of images. 
+-    I can browse other users’ walls of images.
+
 As an authenticated user:
 -    I can link to images. 
 -    I can delete images that I’ve linked to. 
