@@ -8,13 +8,13 @@ class AddPin extends Component {
     state = { showFormReview: false };
 
     renderContent() {
-        if (this.state.showFormReview) {
-          return (
-            <AddPinReview
-              onCancel={() => this.setState({ showFormReview: false })}
-            />
-          );
-        }
+      if (this.state.showFormReview) {
+        return (
+          <AddPinReview
+            onCancel={() => this.setState({ showFormReview: false })}
+          />
+        );
+      }
     
         return (
           <AddPinForm
@@ -32,7 +32,6 @@ class AddPin extends Component {
         );
     }
 }
-
 
 export default reduxForm({
     form: 'pinForm'

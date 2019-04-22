@@ -3,13 +3,15 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
 // get all action creators
 import * as actions from '../actions';
+// import history from '../history';
 
-// component boilerplate for router
+// component boilerplate for routes
 import Header from './Header';
 import Home from './Home';
 import AddPin from './AddPin';
-import PinList from './PinList';
+import HomeFeed from './HomeFeed';
 import Profile from './Profile';
+import PinPage from './PinPage';
 
 class App extends Component {
 
@@ -20,13 +22,14 @@ class App extends Component {
   render() {
     return (
       <div className = "ui container">
-          <BrowserRouter>
+          <BrowserRouter >
             <div >
               <Header />
               <Route exact path="/" component={Home} />
-              <Route exact path="/PinList"component={PinList} />
-              <Route exact path="/AddPin"component={AddPin} />
-              <Route path="/Profile"component={Profile} />
+              <Route exact path="/HomeFeed" component={HomeFeed} />
+              <Route exact path="/AddPin" component={AddPin} />
+              <Route exact path="/Profile/:user_id" component={Profile} />
+              <Route exact path="/Pin/:pin_id" component={PinPage} />
             </div>
           </BrowserRouter>
       </div>

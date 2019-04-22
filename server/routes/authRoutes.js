@@ -1,34 +1,48 @@
+const express = require('express');
+const router = express.Router();
+const mongoose = require('mongoose');
 const passport = require('passport');
 
-module.exports = (app) => {
 
-    // example create test route handler
-    // app.get('/', (req,res) => {
-    //     res.send({test: 'tested'});
-    // });
+// Load pin model
+// const Pin = mongoose.model('pins');
+// const User = mongoose.model('users');
+//const Pin = require('../models/Pins');
+const User = require('../models/User');
 
+
+    // @route   GET /api/auth/test
+    // @desc    Tests user route
+    router.get('/api/auth/test', (req, res) => res.json({ msg: 'User Routes Works' }));
+
+    // These routes are private (protected with passport)
     // create github authentication route handlers flow
-    app.get('/auth/github', 
+    router.get('/auth/github', 
         passport.authenticate('github'
         ,{
             scope: ['user']
         }
     ));
-
-    app.get('/auth/github/callback', 
+    // @route   GET /auth/github/callback
+    // @desc    github Authorization callback URL
+    router.get('/auth/github/callback', 
         passport.authenticate('github'),
         (req,res) => {
             res.redirect('/');
         }
     );
-    // User is logged out when directed here
-    app.get('/api/logout', (req, res) => {
+    // @route   GET /api/current_user
+    // @desc    User is logged out when directed here
+    router.get('/api/logout', (req, res) => {
         req.logout();
         res.redirect('/');
     });
-    // responds with user model if user is logged in
-    app.get('/api/current_user', (req, res) => {
+
+    // @route   GET /api/current_user
+    // @desc    responds with user model if user is logged in
+    router.get('/api/current_user', (req, res) => {
         // passport automatically attaches user to req
         res.send(req.user);
     });
-};
+
+module.exports = router;

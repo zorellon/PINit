@@ -11,15 +11,16 @@ class Header extends Component {
             case false:
                 return <li className ="item"><a href="/auth/github" >Log In with GitHub </a></li>;
             default:
+            //<a href="/Profile" >Profile </a>
                 return [
-                    <li key="1" className ="item"><a href="/Profile" >Profile </a></li>,
-                    <li key="2" className ="item"><a href="/AddPin" >Add Pin </a></li>,
-                    <li key="3" className ="item"><a href="/api/logout" >Log Out </a></li>
+                    <li key="1" className ="item"><Link to={`/Profile/${this.props.auth._id}`}> Profile </Link></li>,
+                    <li key="2" className ="item"><Link to="/AddPin"> Add Pin </Link></li>,
+                    <li key="3" className ="item"><a href="/api/logout"> Log Out  </a></li>
                     
                 ];
         }
     }
-    
+
     render(){
         return(
             <div className="ui secondary pointing menu">
@@ -32,7 +33,7 @@ class Header extends Component {
                     </Link>
                 </div>        
                 <div className="right menu">
-                    <li key="4" className ="item"><a href="/PinList" >Pin List </a></li>
+                    <li key="4" className ="item"><Link to="/HomeFeed"> HomeFeed  </Link></li>
                     {this.renderLoggedInOption()}         
                 </div>
             </div>
@@ -41,7 +42,9 @@ class Header extends Component {
 }
 
 function mapStateToProps(state){
-    return{auth: state.auth };
+    return{
+        auth: state.auth 
+    };
 }
 
 export default connect(mapStateToProps)(Header);

@@ -80,7 +80,7 @@ class AddPinForm extends Component {
 const validate = (formValues) => {
     const errors = {};
 
-    //errors.url = validateURL(formValues.url || '');
+    //errors.pinURL = validateURL(formValues.pinURL || '');
 
     if (!formValues.pinTitle){
         errors.pinTitle = "You must enter a title!";
@@ -98,5 +98,6 @@ const validate = (formValues) => {
 export default reduxForm({
     form: 'pinForm',
     validate: validate,
+    // so that you can go back and edit
     destroyOnUnmount: false
 })(AddPinForm);

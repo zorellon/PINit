@@ -5,4 +5,4 @@ const userSchema = new Schema({
     githubId: String,
     githubName: String
 });
-module.exports = mongoose.model('users', userSchema);
+module.exports = User = mongoose.model('users', userSchema);

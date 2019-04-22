@@ -23,7 +23,7 @@ const AddPinReview = ({ onCancel, formValues, createPin, history }) => {
                     <img
                         src= {formValues.pinURL}
                         style={{ maxWidth: '100%' }}
-                        alt= "Preview the entered  URL"
+                        alt= "Go back and try new image URL"
                     />
                     </div>  
                 </div>
@@ -35,6 +35,7 @@ const AddPinReview = ({ onCancel, formValues, createPin, history }) => {
                 Back
             </button>
             <button
+            //, this.props.history
                 onClick={() => createPin(formValues, history)}
                 className="ui button primary"
             >
@@ -46,7 +47,9 @@ const AddPinReview = ({ onCancel, formValues, createPin, history }) => {
 
 function mapStateToProps(state) {
     //console.log(state);
-    return { formValues: state.form.pinForm.values };
+    return { 
+        formValues: state.form.pinForm.values 
+    };
 }
 
 export default connect(mapStateToProps, actions)(withRouter(AddPinReview));
