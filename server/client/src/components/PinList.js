@@ -10,7 +10,9 @@ class PinList extends Component {
     render(){
         const {pins} = this.props;
 
-        return  pins.map( (pin) => <Pin key={pin._id} pin={pin} /> );    
+        return  pins.map( (pin) => (
+            <Pin key={pin._id} pin={pin} /> 
+        ));    
     }  
 }
 

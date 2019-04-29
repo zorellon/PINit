@@ -10,31 +10,65 @@ import Pin from './Pin';
 class PinPage extends Component{
 
     componentDidMount(){
-        const pin_id = this.props.match.params.pin_id;
-        this.props.fetchPin(pin_id);
+        // const pin_id = this.props.match.params.pin_id;
+        //const pin_id = this.props.pin_id;
+        //this.props.fetchPin(pin_id);
          //const currentUserId = this.props.fetchUser();
          //console.log(currentUserId);
+         this.props.fetchPins();
+
      }
 
-                //className="pin-list" 
+    renderSinglePin(pins,pin_id,auth_id){
+
+        
+
+        const UrlPin = pins.find( (pin) => pin._id === pin_id);
+        var showDelete = "false"
+        if (UrlPin.pinAuthor === auth_id._id){
+            showDelete = "true";
+        }
+
+        return  (
+            <Pin 
+                key={UrlPin._id} 
+                pin={UrlPin} 
+                showDelete = {showDelete}
+            /> 
+        ); 
+    }
+    //className="pin-list" 
     // pass current user into pin aswell
     render() {
-        const pin_id = this.props.match.params.pin_id;
-        const { pins } = this.props.pins;
-        //console.log(pins);
-    
-        return(
-            pins.map((pin) => {
-                if(pin._id === pin_id){
-                    return(<Pin 
-                        key = {pin_id} 
-                        pin= {pin} 
-                    />
-                    );
-                }
-            })  
+        //const pin_id = this.props.match.params.pin_id;
+        const pin_id = this.props.pin_id;
+        //console.log(pin_id);
+        const { pins, loading } = this.props.pins;
 
-           );
+        // const auth_id = this.props.auth._id;
+        // console.log(auth_id);
+
+        
+        var auth_id = "00000";
+        if(this.props.auth === null){
+            auth_id = this.props.auth._id;
+
+        }
+
+        if (pins === null || loading || auth_id === null ) {
+            return (
+                <div>
+                    Loading..
+                </div>
+            );
+        } else {
+            return(
+                //<PinList pins={pins} />
+                <div>
+                    {this.renderSinglePin(pins,pin_id,auth_id)}
+                </div>
+            );
+        }
             
     };
     
@@ -46,8 +80,8 @@ const mapStateToProps = (state, ownProps) => {
 
     return{ 
         //pin: state.pins.find(pin => pin.id === pinId),
-        user_id: ownProps.match.params.user_id,
-
+        pin_id: ownProps.match.params.pin_id,
+        // pin_id = this.props.match.params.pin_id,
         //currentUserId: state.auth._id,
         pins: state.pins,
         auth: state.auth

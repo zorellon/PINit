@@ -29,6 +29,7 @@ class Pin extends Component{
     render(){
         const user_id  = this.props.auth_id;
         const {_id, pinURL, pinTitle, pinDescription, pinAuthor, dateCreated} = this.props.pin;
+        const showDelete = this.props.showDelete;
         return(
             <div>
                  <div className="ui card" >
@@ -53,7 +54,7 @@ class Pin extends Component{
                      </div>
                      <div className="extra content"> 
 
-                        {pinAuthor === user_id ? (
+                        {showDelete === "true" ? (
                             <button
                                 onClick={this.onDeleteClick.bind(this, _id,this.props.history)}
                                 type="button"
